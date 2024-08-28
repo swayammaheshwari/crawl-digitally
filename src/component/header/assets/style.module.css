@@ -1,0 +1,205 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 9rem 2rem 0;
+  line-height: 7rem;
+}
+body {
+  overflow-x: hidden;
+}
+
+.header h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 8.5rem;
+  background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(0, 17, 19));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: 55;
+  position: relative;
+}
+
+.header h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 4.5rem;
+  position: relative;
+  z-index: 55;
+}
+.header p {
+  margin: 0;
+  padding: 0;
+  font-size: 1.5rem;
+  position: relative;
+  z-index: 55;
+}
+
+.header > span {
+  margin-top: 6rem;
+  position: relative;
+  display: inline-block;
+  animation: jump 1s infinite alternate;
+  cursor: pointer;
+  position: relative;
+  z-index: 55;
+}
+
+/* for focus */
+
+/* style.module.css */
+.hero {
+  overflow: hidden;
+}
+.focus {
+  position: absolute;
+
+  background: url("crawlbg.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  z-index: 10;
+}
+@keyframes transform {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes jump {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Mobile View */
+@media only screen and (max-width: 767px) {
+  .tab-view-only {
+    display: none !important;
+  }
+  .header {
+    line-height: 3rem;
+  }
+  .header h1 {
+    font-size: 3rem;
+  }
+  .header h2 {
+    font-size: 1.5rem;
+  }
+  .header p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet View */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .mobile-view-only {
+    display: none !important;
+  }
+  .header {
+    line-height: 5rem;
+  }
+  .header h1 {
+    font-size: 5.5rem;
+  }
+  .header h2 {
+    font-size: 2.5rem;
+  }
+  .header p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .header h2 {
+    font-size: 1rem;
+  }
+  .header h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Your CSS file */
+/* Your CSS file */
+/* .scrollText {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  z-index: 60;
+}
+
+.scrollText span {
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-40%);
+  }
+} */
+
+.scrolling {
+  width: 420px;
+  height: 70px;
+  overflow: hidden;
+  position: relative;
+}
+.scrolling div {
+  display: block;
+  width: 200%;
+  height: 70px;
+  position: absolute;
+  overflow: hidden;
+  /* background: #101010; */
+  animation: scroll 5s linear infinite;
+}
+.scrolling span {
+  float: left;
+  width: 50%;
+  /* background: #101010; */
+  color: #fff;
+  z-index: 100;
+  position: relative;
+}
+@keyframes scroll {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: -100%;
+  }
+}
+
+@media (max-width : 500px) {
+  .scrolling{
+    width: 100%;
+
+  }
+
+}

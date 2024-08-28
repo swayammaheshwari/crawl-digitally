@@ -1,0 +1,71 @@
+.myswiper {
+  position: relative;
+  padding-bottom: 40px;
+}
+
+/* .myswiper:hover {
+  cursor: none;
+} */
+
+/* .myswiper img {
+  width: 100%;
+} */
+
+.card {
+  /* padding: 8px; */
+  overflow: hidden;
+}
+
+.card__image img {
+  border-radius: 24px;
+}
+
+.card__title {
+  transition: opacity 0.3s;
+}
+
+.swiper-slide:not(.swiper-slide-active) .card__title {
+  opacity: 0;
+}
+
+.cursor {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 50;
+}
+.cursor img {
+  border-radius: 50%;
+  width: 10vh;
+}
+@media (max-width: 720px) {
+  .card {
+    padding: 7px !important ;
+  }
+  .swiper-slide{
+    width: 300px !important ;
+
+  }
+}
+@media (max-width : 800px){
+  .card {
+    /* padding: 8px !important ; */
+  }
+}
+/* @media (max-width : 1000px){
+  
+  .swiper-slide{
+    width: 800px !important ;
+  }
+} */
+
+.swiper-slide {
+  padding: 15px;
+}
+
+
+
+
+
+
+

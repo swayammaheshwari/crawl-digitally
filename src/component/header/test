@@ -1,0 +1,396 @@
+import React, { useEffect, useRef } from 'react';
+import styles from './assets/style.module.css';
+
+const Header = () => {
+  const focusRef = useRef(null);
+
+  useEffect(() => {
+    const focus:any = focusRef.current;
+    let targetX = 0;
+    let targetY = 0;
+
+    const updateFocusPosition = () => {
+      const currentX = parseFloat(focus.style.left) || 0;
+      const currentY = parseFloat(focus.style.top) || 0;
+
+      const deltaX = (targetX - currentX) ; 
+      const deltaY = (targetY - currentY) ; 
+
+      focus.style.left = currentX + deltaX + "px";
+      focus.style.top = currentY + deltaY + "px";
+
+      requestAnimationFrame(updateFocusPosition);
+    };
+
+    document.onmousemove = function (e:any) {
+      targetX = e.pageX - focus.offsetWidth / 2;
+      targetY = e.pageY - focus.offsetHeight / 2;
+    };
+
+    updateFocusPosition();
+
+    return () => {
+      document.onmousemove = null; // Clear event listener on component unmount
+    };
+  }, []);
+
+  const action = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight - 50,
+      behavior: 'smooth',
+    });
+  };
+
+  return (
+    <div className={styles.hero}>
+      <div ref={focusRef} className={styles.focus}></div>
+      <section className={styles.header}>
+        <h2>WE WAVE THE WEB OF</h2>
+        <h1>CREATIVITY</h1>
+        <p>LET'S CRAWL, WALK, AND SOAR TOGETHER.</p>
+        <span onClick={action}>SCROLL!</span>
+      </section>
+    </div>
+  );
+};
+
+export default Header;
+
+
+
+// new changes 
+
+import React, { useEffect, useRef } from "react";
+import styles from "./assets/style.module.css";
+
+const Header: React.FC = () => {
+  const focusRef = useRef<HTMLDivElement>(null);
+  const mainDivRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (focusRef.current) {
+        const focus = focusRef.current;
+
+        const targetX = e.pageX - focus.offsetWidth / 2;
+        const targetY = e.pageY - focus.offsetHeight / 2;
+
+        focus.style.transition = "top 0.2s, left 0.2s";
+        focus.style.left = `${targetX}px`;
+        focus.style.top = `${targetY}px`;
+      }
+    };
+
+    const handleMouseLeave = () => {
+      document.onmousemove = null; // Clear event listener when mouse leaves the main div
+      const focus:any = focusRef.current;
+        focus.style.transition = "width 0.3s, height 0.3s";
+        focus.style.width = "0px"; // Adjust the width and height as needed
+        focus.style.height = "0px"
+    };
+
+    const handleMouseEnter = () => {
+      document.onmousemove = handleMouseMove; // Re-add the onmousemove event
+      const focus:any = focusRef.current;
+      focus.style.transition = "width 0.3s, height 0.3s";
+      focus.style.width = "280px"; // Adjust the width and height as needed
+      focus.style.height = "280px"
+    };
+
+    if (mainDivRef.current) {
+      mainDivRef.current.addEventListener("mouseenter", handleMouseEnter);
+      mainDivRef.current.addEventListener("mouseleave", handleMouseLeave);
+    }
+
+    return () => {
+      if (mainDivRef.current) {
+        mainDivRef.current.removeEventListener("mouseenter", handleMouseEnter);
+        mainDivRef.current.removeEventListener("mouseleave", handleMouseLeave);
+      }
+      document.onmousemove = null; // Clear global event listener on component unmount
+    };
+  }, []);
+
+  const action = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight - 50,
+      behavior: "smooth",
+    });
+  };
+
+  return (
+    <div ref={mainDivRef} className="main">
+      <div className={styles.hero}>
+        <div ref={focusRef} className={styles.focus}></div>
+        <section className={styles.header}>
+          <h2>WE WAVE THE WEB OF</h2>
+          <h1>CREATIVITY</h1>
+          <p>LET'S CRAWL, WALK, AND SOAR TOGETHER.</p>
+          <span onClick={action}>SCROLL!</span>
+        </section>
+      </div>
+    </div>
+  );
+};
+
+export default Header;
+
+
+
+
+// test 22
+
+import React, { useEffect } from 'react';
+import styles from './assets/style.module.css';
+
+const Header: React.FC = () => {
+  const action = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight - 50,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    const smoothness = 0.1;
+
+    const focus: HTMLElement | null = document.getElementById('focus') as HTMLElement;
+    let targetX = 0;
+    let targetY = 0;
+
+    const hero: HTMLElement | null = document.querySelector('.hero') as HTMLElement;
+
+    function updateFocusPosition() {
+      const currentX = parseFloat(focus?.style.left || '0');
+      const currentY = parseFloat(focus?.style.top || '0');
+
+      const deltaX = (targetX - currentX) * smoothness;
+      const deltaY = (targetY - currentY) * smoothness;
+
+      if (focus) {
+        focus.style.left = currentX + deltaX + 'px';
+        focus.style.top = currentY + deltaY + 'px';
+      }
+
+      requestAnimationFrame(updateFocusPosition);
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (focus) {
+        targetX = e.pageX - focus.offsetWidth / 2;
+        targetY = e.pageY - focus.offsetHeight / 2;
+      }
+    };
+
+    const handleMouseOut = (e: MouseEvent) => {
+      if (hero && (e.relatedTarget === null || !hero.contains(e.relatedTarget as Node))) {
+        // If mouse moves out of the hero section
+        let width = focus.offsetWidth;
+        let height = focus.offsetHeight;
+
+        const decrease = setInterval(() => {
+          if (width > 0 && height > 0) {
+            width -= 2;
+            height -= 2;
+            focus.style.width = width + 'px';
+            focus.style.height = height + 'px';
+          } else {
+            clearInterval(decrease);
+          }
+        }, 10);
+      }
+    };
+
+    document.onmousemove = handleMouseMove;
+    hero?.addEventListener('mouseout', handleMouseOut);
+
+    updateFocusPosition();
+
+    return () => {
+      document.onmousemove = null;
+      hero?.removeEventListener('mouseout', handleMouseOut);
+    };
+  }, []);
+
+  return (
+    <div className={styles.hero}>
+      <h1>highlight</h1>
+      <div id="focus" className={styles.focus}></div>
+      <section className={styles.header}>
+        <h2>WE WAVE THE WEB OF</h2>
+        <h1>CREATIVITY</h1>
+        <p>LET'S CRAWL, WALK, AND SOAR TOGETHER.</p>
+        <span onClick={action}>SCROLL!</span>
+      </section>
+    </div>
+  );
+};
+
+export default Header;
+
+
+// cardGrid 
+
+import styles from "./assets/style.module.css"; // Import the CSS module
+import React, { useEffect, useRef, useState } from "react";
+const CardGrid = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     // Handle window resize logic if needed
+  //     const totalScrollHeight = Math.max(
+  //       document.body.scrollHeight, document.documentElement.scrollHeight,
+  //       document.body.offsetHeight, document.documentElement.offsetHeight,
+  //       document.body.clientHeight, document.documentElement.clientHeight
+  //     );
+
+  //     const totalScrollWidth = Math.max(
+  //       document.body.scrollWidth, document.documentElement.scrollWidth,
+  //       document.body.offsetWidth, document.documentElement.offsetWidth,
+  //       document.body.clientWidth, document.documentElement.clientWidth
+  //     );
+
+  //     console.log('Total scrollable height:', totalScrollHeight);
+  //     console.log('Total scrollable width:', totalScrollWidth);
+  //   };
+
+  //   handleResize(); // Initially calculate the scrollable height and width
+
+  //   window.addEventListener("resize", handleResize);
+
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const totalScrollableHeight = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.offsetHeight,
+        document.body.clientHeight,
+        document.documentElement.clientHeight
+      );
+
+      const totalScrollableWidth = Math.max(
+        document.body.scrollWidth,
+        document.documentElement.scrollWidth,
+        document.body.offsetWidth,
+        document.documentElement.offsetWidth,
+        document.body.clientWidth,
+        document.documentElement.clientWidth
+      );
+
+      const divHeight = 100; // Height of your div in pixels
+      const divWidth = 100; // Width of your div in pixels
+
+      const numDivsVertically = Math.floor(totalScrollableHeight / divHeight);
+      const numDivsHorizontally = Math.floor(totalScrollableWidth / divWidth);
+
+      console.log("Number of divs vertically:", numDivsVertically);
+      console.log("Number of divs horizontally:", numDivsHorizontally);
+    };
+
+    handleResize(); // Calculate initially
+
+    window.addEventListener("resize", handleResize);
+
+    // return () => {
+    //   window.removeEventListener("resize", handleResize);
+    // };
+  }, []);
+
+  useEffect(() => {
+    const getRandomColor = () => "#105f5a";
+
+    const handleMouseMove = (e: any) => {
+      // console.log(e)
+      let x = e?.offsetX;
+      let y = e?.offsetY;
+      e.target.style.setProperty("--x", `${x}` + "px");
+      e.target.style.setProperty("--y", `${y}` + "px");
+      //   console.log(x)
+      //   console.log(y)
+    };
+
+    const container = document.querySelector(`.${styles.container}`); // Use styles.container
+
+    if (container) {
+      for (let i = 0; i < 168; i++) {
+        const newDiv = document.createElement("div");
+        newDiv.classList.add(styles.card); // Use styles.card
+        newDiv.style.setProperty("--clr", getRandomColor());
+        newDiv.addEventListener("mousemove", handleMouseMove);
+        container.appendChild(newDiv);
+      }
+    }
+
+    return () => {
+      // Clean up if necessary
+    };
+  }, ["mousemove"]);
+
+  return (
+    <div id="root" style={{ position: "absolute", zIndex: "50" }}>
+      <div className={styles.container}>
+        {/* Divs will be added dynamically here */}
+      </div>
+    </div>
+  );
+};
+
+export default CardGrid;
+
+
+
+// lastone which i have commented in the main section 
+
+  //   const handleMouseMove = (e: MouseEvent) => {
+  //     if (focusRef.current) {
+  //       const focus = focusRef.current;
+
+  //       const targetX = e.pageX - focus.offsetWidth / 2;
+  //       const targetY = e.pageY - focus.offsetHeight / 2;
+
+  //       focus.style.transition = "top 0.2s, left 0.2s";
+  //       focus.style.left = `${targetX}px`;
+  //       focus.style.top = `${targetY}px`;
+  //     }
+  //   };
+
+  //   const handleMouseLeave = () => {
+  //     document.onmousemove = null; // Clear event listener when mouse leaves the main div
+  //     const focus = focusRef.current;
+  //     if (focus) {
+  //       focus.style.transition = "width 0.3s, height 0.3s";
+  //       focus.style.width = "0"; // Adjust the width and height as needed
+  //       focus.style.height = "0";
+  //     }
+  //   };
+
+  //   const handleMouseEnter = () => {
+  //     document.onmousemove = handleMouseMove; // Re-add the onmousemove event
+  //     const focus = focusRef.current;
+  //     if (focus) {
+  //       focus.style.transition = "width 0.3s, height 0.3s";
+  //       focus.style.width = "280px"; // Adjust the width and height as needed
+  //       focus.style.height = "280px";
+  //     }
+  //   };
+
+  //   if (mainDivRef.current) {
+  //     mainDivRef.current.addEventListener("mouseenter", handleMouseEnter);
+  //     mainDivRef.current.addEventListener("mouseleave", handleMouseLeave);
+  //   }
+
+  //   return () => {
+  //     if (mainDivRef.current) {
+  //       mainDivRef.current.removeEventListener("mouseenter", handleMouseEnter);
+  //       mainDivRef.current.removeEventListener("mouseleave", handleMouseLeave);
+  //     }
+  //     document.onmousemove = null; // Clear global event listener on component unmount
+  //   };
+  // }, [focusRef, mainDivRef]);

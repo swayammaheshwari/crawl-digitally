@@ -1,0 +1,26 @@
+/* style.module.css */
+
+.footer {
+  background-color: #232323;
+  padding: 48px 0;
+}
+.li {
+  list-style: none;
+}
+.link {
+  text-decoration: none;
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: #bbb;
+}
+
+.socialLinks {
+  margin-top: 16px;
+}
+
+.socialLinks > a {
+  margin-right: 8px;
+}

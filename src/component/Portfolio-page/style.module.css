@@ -1,0 +1,153 @@
+/**
+ * style.module.css
+ *
+ * @format
+ */
+
+/* .footer {
+  background-color: #232323;
+  padding: 48px 0;
+}
+.li {
+  list-style: none;
+  text-align: center;
+}
+
+.typo {
+  text-align: center;
+}
+.link {
+  text-decoration: none;
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: #bbb;
+}
+
+.socialLinks {
+  margin-top: 16px;
+}
+
+.socialLinks > a {
+  margin-right: 8px;
+}  */
+
+.chat {
+  width: 100%;
+  margin-top: 50px;
+  background-color: #fff;
+  border-top-right-radius: 69px;
+  border-top-left-radius: 69px;
+}
+.chat div {
+  padding-top: 20px;
+  width: 80%;
+  margin: auto;
+}
+.chat div hr {
+  background-color: #101010;
+}
+.chat div h1 {
+  color: #101010;
+  text-align: center;
+  font-style: normal;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+.chat div h1 img {
+  width: 40px;
+}
+.flex_box {
+  color: black;
+  display: flex;
+  justify-content: space-between !important;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.flex_box div{
+  width: auto;
+}
+
+
+.list {
+  display: flex;
+}
+.list li {
+  list-style: none;
+  color: #232323;
+  text-align: center;
+  padding: 5px;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem; /* 120% */
+  text-transform: capitalize;
+}
+.para {
+  color: #000;
+  text-align: right;
+
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem; /* 120% */
+  text-transform: capitalize;
+}
+
+/* Mobile View */
+@media only screen and (max-width: 767px) {
+  .chat div {
+    width: 90%;
+  }
+  .flex_box {
+    flex-direction: column;
+    text-align: center !important;
+  }
+  .para {
+    text-align: center !important;
+  }
+  .list_box {
+    text-align: center !important;
+  }
+
+  .list li {
+    margin: auto;
+  }
+}
+
+/* Tablet View */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .list li {
+    list-style: none;
+    color: #232323;
+    text-align: center;
+    padding: 5px;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem; /* 120% */
+    text-transform: capitalize;
+  }
+  .para {
+    color: #000;
+    text-align: right;
+
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1rem; /* 120% */
+    text-transform: capitalize;
+  }
+}
+
+/* Desktop View */
+@media only screen and (min-width: 1024px) {
+  .mobile-view-only {
+    display: none !important;
+  }
+  .tab-view-only {
+    display: none !important;
+  }
+}

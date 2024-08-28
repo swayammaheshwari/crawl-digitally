@@ -1,0 +1,63 @@
+.portfolio {
+  width: 70%;
+  margin: 4rem auto;
+  padding: auto;
+  text-align: center;
+  z-index: 20;
+}
+
+.portfolio h1 {
+  font-size: 2rem;
+}
+
+.portfolio p {
+  opacity: 0.8;
+}
+
+.portfolio_div {
+  margin: 3rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: justify;
+}
+.portfolio_div hr {
+  width: 10%;
+  height: 0;
+}
+.portfolio_div h3 {
+  margin: auto 1em;
+  font-size: 2rem;
+}
+
+.contentdiv {
+  padding: 9.5%;
+  text-align: center;
+}
+.contentdiv > p {
+  /* padding: 9.5%; */
+  text-align: justify;
+}
+
+.contentdiv h1 {
+  padding-bottom: 5%;
+}
+
+@media (max-width: 769px) {
+  .portfolio {
+    width: 100% !important;
+    text-align: justify !important ;
+    
+  }
+  .contentdiv > p {
+    padding: 2%;
+    text-align: justify;
+  }
+  .portfolio_div {
+    margin: 1rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+  }
+}
